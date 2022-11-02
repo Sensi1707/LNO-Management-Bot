@@ -1,3 +1,5 @@
+//Index File
+
 const { Client, GatewayIntentBits, Partials, Collection } = require('discord.js');
 
 const {Guilds, GuildMembers, GuildMessages} = GatewayIntentBits;
