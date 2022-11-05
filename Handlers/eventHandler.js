@@ -1,4 +1,3 @@
-
 function loadEvents(client) {
     const ascii = require('ascii-table');
     const fs = require('fs');
@@ -12,10 +11,10 @@ function loadEvents(client) {
             const event = require(`../Events/${folder}/${file}`);
 
             if (event.rest) {
-                if(event.once)
+                if (event.once)
                     client.rest.once(event.name, (...args) =>
-                    event.execute(...args, client)
-                );
+                        event.execute(...args, client)
+                    );
                 else
                     client.rest.on(event.name, (...args) =>
                         event.execute(...args, client)
@@ -32,4 +31,6 @@ function loadEvents(client) {
     return console.log(table.toString(), "\nLoaded events");
 }
 
-module.exports = {loadEvents};
+module.exports = { loadEvents };
+
+//eventhandler

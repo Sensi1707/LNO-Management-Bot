@@ -1,3 +1,4 @@
 {
-    "token": "MTAzNjY5MTI0NDY4MTgwMTc4OQ.Ge4b4N.zT50vWstjlv4kwrbEEHjWwXCNqTuBj5xdSQ7zg"
+    "token": "MTAzNjY5MTI0NDY4MTgwMTc4OQ.Ge4b4N.zT50vWstjlv4kwrbEEHjWwXCNqTuBj5xdSQ7zg",
+    "mongodb": "mongodb+srv://sensi:Sami.2009@lno-management.lvacxp1.mongodb.net/?retryWrites=true&w=majority"
 }
