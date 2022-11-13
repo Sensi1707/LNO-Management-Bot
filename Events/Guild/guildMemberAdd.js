@@ -7,9 +7,9 @@ module.exports = {
     execute(member) {
 
         const {user, guild} = member;
-        const welcomeChannel = member.guild.channels.cache.get("1037770958691369050");
+        const welcomeChannel = member.guild.channels.cache.get("1021385132973756428");
         const welcomeMessage = `Willkommen <@${member.id}>! `;
-        const memberRole = '1038087101104799746';
+        const memberRole = '1021389783429283910';
 
 
         const welcomeEmbed = new EmbedBuilder()

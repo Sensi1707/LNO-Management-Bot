@@ -10,10 +10,12 @@ module.exports = {
             keepAlive: true,
         });
 
+
         if (mongoose.connect) {
             console.log('MongoDB connection succesful.')
         }
 
         console.log(`${client.user.username} is now online.`);
+
     },
 };

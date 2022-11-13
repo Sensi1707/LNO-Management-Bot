@@ -15,17 +15,11 @@ module.exports = {
 
 
         } else if (interaction.isButton()) {
-            const role = interaction.guild.roles.cache.get('1038088188499075122');
+            const button = client.buttons.get(interaction.customId);
+            
+            if(!button) return new Error('Dieser Button existiert nicht.');
 
-            return interaction.member.roles
-                .add(role)
-                .then((member) =>
-                    interaction.reply({
-                        content: `${role} hat been assigned  to you.`,
-                        ephemeral: true,
-                    }),
-                );
-
+            button.execute(interaction, client)
         } else {
             return;
         }

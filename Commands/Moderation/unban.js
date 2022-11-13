@@ -1,9 +1,10 @@
 const { SlashCommandBuilder, EmbedBuilder, PermissionFlagsBits } = require("discord.js");
+const { punishments } = require("../../config.json")
 
 module.exports = {
     data: new SlashCommandBuilder()
         .setName("unban")
-        .setDescription("Unban a user from the discord server.")
+        .setDescription("Entbanne eine Person aus diesem Server mithilfe der ID.")
         .setDefaultMemberPermissions(PermissionFlagsBits.BanMembers)
         .addStringOption(option =>
             option.setName("userid")
@@ -20,9 +21,10 @@ module.exports = {
             await interaction.guild.members.unban(userId);
 
             const embed = new EmbedBuilder()
-                .setDescription(`Succesfully unbanned id ${userId} from the guild.`)
+                .setDescription(`Erfolgreich <@${userId}> aus diesem Server entbannt.`)
                 .setColor(0x5fb041)
                 .setTimestamp();
+
 
             await interaction.reply({
                 embeds: [embed],
@@ -31,10 +33,14 @@ module.exports = {
             console.log(err);
 
             const errEmbed = new EmbedBuilder()
-                .setDescription(`Please provide a valid member's ID.`)
+                .setDescription(`Bitte gib eine gültige User ID an.`)
                 .setColor(0xc72c3b);
 
             interaction.reply({ embeds: [errEmbed], ephemeral: true });
-        }
+        };
+
+        await guild.channels.cache.get(punishments).send({
+            embeds: [embed],
+        });
     }
 }

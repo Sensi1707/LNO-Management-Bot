@@ -1,4 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder, PermissionFlagsBits } = require("discord.js");
+const { punishments } = require("../../config.json")
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -24,8 +25,12 @@ module.exports = {
         const member = await interaction.guild.members.fetch(user.id);
 
         const errEmbed = new EmbedBuilder()
-            .setDescription(`You can't take action on ${user.username} since they have a higher role.`)
-            .setColor(0xc72c3b)
+            .setDescription(`Du kannst ${user.username} nicht kicket, da er/sie eine höhere Rolle besitzt.`)
+            .setColor(0xc72c3b);
+
+        const successEmbed = new EmbedBuilder()
+            .setDescription(`${user.username} wurde erfolgreich gekickt.`)
+            .setColor(0x00ff00)
 
         if (member.roles.highest.position >= interaction.member.roles.highest.position)
             return interaction.reply({ embeds: [errEmbed], ephemeral: true });
@@ -33,10 +38,13 @@ module.exports = {
         await member.kick(reason);
 
         const embed = new EmbedBuilder()
-            .setDescription(`Succesfully kicked ${user} with reason: ${reason}`);
+            .setColor(0xc72c3b)
+            .setFields(
+                { name: `Successfully kicked ${user}`, value: `reason: \`${reason}\`` });
 
-        await interaction.reply({
-            embeds: [embed],
+        await guild.channels.cache.get(punishments).send({
+            embeds: [successEmbed],
         });
+        await interaction.reply({content: "Erfolgreich gekickt!", ephemeral: true});
     }
 }

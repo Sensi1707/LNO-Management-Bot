@@ -1,5 +1,6 @@
 const { Client, SlashCommandBuilder, PermissionFlagsBits, EmbedBuilder } = require("discord.js");
 const ms = require("ms");
+const { punishments } = require("../../config.json")
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -27,19 +28,19 @@ module.exports = {
         const user = options.getUser("target");
         const member = guild.members.cache.get(user.id);
         const time = options.getString("time");
-        const convertedTime = ms(time);
+        const convertedTime = ms(time)* 60000;
         const reason = options.getString("reason") || "No reason provided";
-
+        
         const errEmbed = new EmbedBuilder()
             .setDescription('Something went wrong. Please try again later.')
             .setColor(0xc72c3b)
 
         const succesEmbed = new EmbedBuilder()
             .setTitle("**:white_check_mark: Muted**")
-            .setDescription(`Succesfully muted ${user}.`)
+            .setDescription(`Erfolgreich ${user} gemuted.`)
             .addFields(
-                { name: "Reason", value: `${reason}`, inline: true },
-                { name: "Duration", value: `${time}`, inline: true }
+                { name: "Grund", value: `${reason}`, inline: true },
+                { name: "Länge", value: `${time} Minuten`, inline: true }
             )
             .setColor(0x5fb041)
             .setTimestamp();
@@ -56,9 +57,14 @@ module.exports = {
         try {
             await member.timeout(convertedTime, reason);
 
+
             interaction.reply({ embeds: [succesEmbed], ephemeral: true });
         } catch (err) {
             console.log(err);
-        }
+        };
+
+        await guild.channels.cache.get(punishments).send({
+            embeds: [succesEmbed],
+        });
     }
 }

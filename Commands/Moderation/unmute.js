@@ -1,4 +1,5 @@
 const { Client, SlashCommandBuilder, PermissionFlagsBits, EmbedBuilder } = require("discord.js");
+const { punishments } = require("../../config.json")
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -34,6 +35,10 @@ module.exports = {
 
         try {
             await member.timeout(null);
+            
+            await guild.channels.cache.get(punishments).send({
+                embeds: [succesEmbed],
+            });
 
             interaction.reply({ embeds: [succesEmbed], ephemeral: true });
         } catch (err) {
