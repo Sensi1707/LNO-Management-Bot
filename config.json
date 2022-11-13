@@ -1,6 +1,6 @@
 {
-    "token": "MTAzNjY5MTI0NDY4MTgwMTc4OQ.Ge4b4N.zT50vWstjlv4kwrbEEHjWwXCNqTuBj5xdSQ7zg",
-    "mongodb": "mongodb+srv://Sensi:Sami.2009@cluster.nvnsoeb.mongodb.net/?retryWrites=true&w=majority",
+    "token": "TOKEN",
+    "mongodb": "mongodb",
     "everyone": "1021385132403347507",
     "ticketParent": "1041080338065137734",
     "openticket": "1041094252937097236",
